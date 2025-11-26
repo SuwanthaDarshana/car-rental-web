@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { navbarStyles as styles } from "../assets/dummyStyles";
 import { Link } from "react-router-dom";
+import logo from "../assets/logocar.png";
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -30,7 +31,7 @@ function Navbar() {
             <div className="flex items-center justify-between gap-4">
             <Link to="/" className="flex items-center">
             <div className={`${styles.logoContainer}`}>
-                <img src="{logo}" alt="logo" className="h-[1em] w-auto block" 
+                <img src={logo} alt="logo" className="h-[1em] w-auto block" 
                     style={{display: 'block', objectFit: 'contain'}}
                 />
             </div>
