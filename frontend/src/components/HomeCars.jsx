@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { homeCarsStyles as styles } from "../assets/dummyStyles";
 import carsData from "../assets/carsData";
 import { Zap } from "lucide-react";
@@ -6,8 +6,25 @@ import { useNavigate } from "react-router-dom";
 
 function HomeCars() {
   const navigate = useNavigate();
-  const
+  const [animateCards, setAnimateCards] = useState(false);
+  const [hoveredCard, setHoveredCard] = useState(null);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAnimateCards(true);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleImageError = (e) => {
+    const wrapper = e.target.parentNode;
+    e.target.remove();
+    const placeholder = document.createElement("div");
+    placeholder.className = styles.placeholder;
+    placeholder.innerHTML =
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="48" height="48"><path d="M3 6.75C3 5.78 3.78 5 4.75 5h14.5c.97 0 1.75.78 1.75 1.75v10.5c0 .97-.78 1.75-1.75 1.75H4.75A1.75 1.75 0 0 1 3 17.25V6.75zM8.5 9.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"/></svg>';
+    wrapper.appendChild(placeholder);
+  };
 
   const visibleCars = carsData.slice(0, 6);
 
