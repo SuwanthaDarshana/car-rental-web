@@ -1,5 +1,6 @@
 
 import HomeBanner from '../components/HomeBanner'
+import HomeCars from '../components/HomeCars'
 import Navbar from '../components/Navbar'
 
 function Home() {
@@ -7,6 +8,7 @@ function Home() {
     <>
       <Navbar />
       <HomeBanner />
+      <HomeCars/>
     </>
   )
 }

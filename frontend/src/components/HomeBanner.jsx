@@ -135,12 +135,12 @@ function HomeBanner() {
         <div className={styles.ctaContainer}>
           <div className={styles.ctaCard}>
             <div>
-              <p className={styles.subtitle}>CarBook</p>
+              <p className={styles.subtitle}>AutoLink</p>
               <h3 className={styles.title}>
                 Your Ultimate Car Rental Solution
               </h3>
               <p className={styles.description}>
-                Experience seamless car rentals with CarBook.
+                Experience seamless car rentals with AutoLink.
               </p>
             </div>
             <a href="/cars" className="flex items-center gap-3">

@@ -114,7 +114,7 @@ function Navbar() {
                     className="h-[1em] w-auto block"
                     style={{ display: "block", objectFit: "contain" }}
                   />
-                  <span className={styles.logoText}>CarBook</span>
+                  <span className={styles.logoText}>AUTOLINK</span>
                 </div>
               </Link>
               <div className={styles.navLinksContainer}>
