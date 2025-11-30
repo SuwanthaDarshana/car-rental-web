@@ -70,7 +70,14 @@ function HomeCars() {
                   transitionDelay: `${animateCards ? idx * 100 : 0}ms`,
                 }}
               >
-                ₹
+                <div className={styles.borderOverlay}>
+                    <div className={styles.priceBadge}>
+                        <span className={styles.priceText}>Rs{car.price}/day</span>
+                    </div>
+                    <div className={styles.imageContainer}>
+                        <img src={car.image} alt={car.name} onError={handleImageError} className="w-full h" />
+                    </div>
+                </div>
               </div>
             );
           })}
