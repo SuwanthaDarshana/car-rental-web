@@ -1,8 +1,8 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { navbarStyles as styles } from "../assets/dummyStyles";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logocar.png";
-import { FaSignOutAlt, FaUser } from "react-icons/fa";
+import { FaBars, FaSignOutAlt, FaTimes, FaUser } from "react-icons/fa";
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -13,6 +13,8 @@ function Navbar() {
 
   const location = useLocation();
   const navigate = useNavigate();
+  const buttonRef = useRef(null);
+  const menuRef = useRef(null);
 
   const navLinks = [
     { to: "/", label: "Home" },
@@ -20,7 +22,7 @@ function Navbar() {
     { to: "/contact", label: "Contact" },
   ];
 
-  const handleLogout = useCallback(() =>{
+  const handleLogout = useCallback(() => {
     localStorage.removeItem("authToken");
     setIsLoggedIn(false);
     navigate("/", { replace: true });
@@ -83,19 +85,85 @@ function Navbar() {
                 </div>
               </div>
               <div className={styles.userActions}>
-                {isLoggedIn ?(
-                  <button onClick={handleLogout} className={styles.authButton} aria-label="Logout">
-                    <FaSignOutAlt className="text-base"/>
+                {isLoggedIn ? (
+                  <button
+                    onClick={handleLogout}
+                    className={styles.authButton}
+                    aria-label="Logout"
+                  >
+                    <FaSignOutAlt className="text-base" />
                     <span className={styles.authText}>Logout</span>
                   </button>
-                ):(
-                  <button to='/login' className={styles.authButton} aria-label="Login">
-                    <FaUser className="text-base"/>
+                ) : (
+                  <button
+                    to="/login"
+                    className={styles.authButton}
+                    aria-label="Login"
+                  >
+                    <FaUser className="text-base" />
                     <span className={styles.authText}>Login</span>
                   </button>
                 )}
               </div>
+              <div className="md:hidden flex items-center">
+                <button
+                  onClick={() => setIsOpen((p) => !p)}
+                  aria-label={isOpen ? "Close menu" : "Open menu"}
+                  aria-expanded={isOpen}
+                  aria-controls="mobile-menu"
+                  className={styles.mobileMenuButton}
+                  ref={buttonRef}
+                >
+                  {isOpen ? (
+                    <FaTimes className="h-5 w-5" />
+                  ) : (
+                    <FaBars className="h-5 w-5" />
+                  )}
+                </button>
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div
+        id="mobile-menu"
+        ref={menuRef}
+        aria-hidden={!isOpen}
+        className={`${styles.mobileMenu.container} ${
+          isOpen ? styles.mobileMenu.open : styles.mobileMenu.closed
+        }`}
+      >
+        <div className={styles.mobileMenuInner}>
+          <div className="px-4 pt-3 pb-4 space-y-2">
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                onClick={() => setIsOpen(false)}
+                className={`${styles.mobileLink.base} ${
+                  isActive(link.to)
+                    ? styles.mobileLink.active
+                    : styles.mobileLink.inactive
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+          <div className={styles.divider}>
+          <div className="pt-1">
+            {isLoggedIn ? (
+              <button onClick={handleLogout} className={styles.mobileAuthButton}>
+              <FaSignOutAlt className="mr-3 text-base" />
+              Logout
+            </button>
+            ):(
+              <Link to='/login' className={styles.mobileAuthButton} onClick={()=> setIsOpen(false)}>
+              <FaUser className="mr-3 text-base" />
+              Login
+              </Link>
+            )}
+          </div>
           </div>
         </div>
       </div>
