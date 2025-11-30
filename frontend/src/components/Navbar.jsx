@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { navbarStyles as styles } from "../assets/dummyStyles";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logocar.png";
@@ -22,12 +22,66 @@ function Navbar() {
     { to: "/contact", label: "Contact" },
   ];
 
+  // add scroll listener
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(()=>{
+    const handleStorageChange = ()=>{
+      setIsLoggedIn(!!localStorage.getItem("authToken"));
+    };
+    window.addEventListener("storage", handleStorageChange);
+    return ()=> window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  //
+
+  useEffect(() => {
+    setIsLoggedIn(!!localStorage.getItem("authToken"));
+    setIsOpen(false);
+  }, [location]);
+
   const handleLogout = useCallback(() => {
     localStorage.removeItem("authToken");
     setIsLoggedIn(false);
     navigate("/", { replace: true });
     setIsOpen(false);
   }, [navigate]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isOpen &&
+        menuRef.current &&
+        buttonRef.current &&
+        !menuRef.current.contains(event.target) &&
+        !buttonRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isOpen]);
+
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === 'Escape' && isOpen) setIsOpen(false);
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [isOpen]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) setIsOpen(false);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const isActive = (path) => {
     if (path == "/") return location.pathname === "/";
@@ -151,19 +205,26 @@ function Navbar() {
             ))}
           </div>
           <div className={styles.divider}>
-          <div className="pt-1">
-            {isLoggedIn ? (
-              <button onClick={handleLogout} className={styles.mobileAuthButton}>
-              <FaSignOutAlt className="mr-3 text-base" />
-              Logout
-            </button>
-            ):(
-              <Link to='/login' className={styles.mobileAuthButton} onClick={()=> setIsOpen(false)}>
-              <FaUser className="mr-3 text-base" />
-              Login
-              </Link>
-            )}
-          </div>
+            <div className="pt-1">
+              {isLoggedIn ? (
+                <button
+                  onClick={handleLogout}
+                  className={styles.mobileAuthButton}
+                >
+                  <FaSignOutAlt className="mr-3 text-base" />
+                  Logout
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  className={styles.mobileAuthButton}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <FaUser className="mr-3 text-base" />
+                  Login
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       </div>
