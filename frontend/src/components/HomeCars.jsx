@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { homeCarsStyles as styles } from "../assets/dummyStyles";
-import carsData from "../assets/carsData";
+import carsData from "../assets/HcarsData";
 import { Zap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -42,46 +42,55 @@ function HomeCars() {
           Discover the finest selection of luxury and high-performance vehicles
           available for rent.
         </p>
+      </div>
 
-        {/*Cars Grid*/}
+      {/*Cars Grid*/}
 
-        <div className={styles.grid}>
-          {visibleCars.map((car, idx) => {
-            const patternStyle =
-              styles.cardPatterns[idx % styles.cardPatterns.length];
-            const borderStyle =
-              styles.borderGradients[idx % styles.borderGradients.length];
-            const shapeStyle =
-              styles.cardShapes[idx % styles.cardShapes.length];
-            return (
-              <div
-                key={car.id}
-                onMouseEnter={() => setHoveredCard(car.id)}
-                onMouseLeave={() => setHoveredCard(null)}
-                className={`${
-                  styles.card
-                } ${patternStyle} border ${borderStyle} ${
-                  animateCards ? "opacity-100" : "opacity-0 translate-y-10"
-                } hover:shadow-2xl hover:-translate-y-3`}
-                style={{
-                  clipPath:
-                    "polygon(0% 15%, 15% 0%, 100% 0%, 100% 85%, 85% 100%, 0% 100%)",
-                  transformStyle: "preserve-3d",
-                  transitionDelay: `${animateCards ? idx * 100 : 0}ms`,
-                }}
-              >
-                <div className={styles.borderOverlay}>
-                    <div className={styles.priceBadge}>
-                        <span className={styles.priceText}>Rs{car.price}/day</span>
-                    </div>
-                    <div className={styles.imageContainer}>
-                        <img src={car.image} alt={car.name} onError={handleImageError} className="w-full h" />
-                    </div>
-                </div>
+      <div className={styles.grid}>
+        {visibleCars.map((car, idx) => {
+          const patternStyle =
+            styles.cardPatterns[idx % styles.cardPatterns.length];
+          const borderStyle =
+            styles.borderGradients[idx % styles.borderGradients.length];
+          const shapeStyle = styles.cardShapes[idx % styles.cardShapes.length];
+          return (
+            <div
+              key={car.id}
+              onMouseEnter={() => setHoveredCard(car.id)}
+              onMouseLeave={() => setHoveredCard(null)}
+              className={`${
+                styles.card
+              } ${patternStyle} border ${borderStyle} ${
+                animateCards ? "opacity-100" : "opacity-0 translate-y-10"
+              } hover:shadow-2xl hover:-translate-y-3`}
+              style={{
+                clipPath:
+                  "polygon(0% 15%, 15% 0%, 100% 0%, 100% 85%, 85% 100%, 0% 100%)",
+                transformStyle: "preserve-3d",
+                transitionDelay: `${animateCards ? idx * 100 : 0}ms`,
+              }}
+            >
+              <div className={styles.borderOverlay} />
+              <div className={styles.priceBadge}>
+                <span className={styles.priceText}>Rs. {car.price}/day</span>
               </div>
-            );
-          })}
-        </div>
+              <div className={styles.imageContainer}>
+                <img
+                  src={car.image}
+                  alt={car.name}
+                  onError={handleImageError}
+                  className="w-full h-full object-cover transition-transform duration-500"
+                  style={{
+                    transform:
+                      hoveredCard === car.id
+                        ? "rotate(0.5deg)"
+                        : "scale(1) rotate(0)",
+                  }}
+                />
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
