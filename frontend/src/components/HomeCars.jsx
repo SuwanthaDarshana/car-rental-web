@@ -4,6 +4,7 @@ import carsData from "../assets/HcarsData";
 import { Zap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+
 function HomeCars() {
   const navigate = useNavigate();
   const [animateCards, setAnimateCards] = useState(false);
@@ -87,6 +88,17 @@ function HomeCars() {
                         : "scale(1) rotate(0)",
                   }}
                 />
+              </div>
+              <div className={styles.content}>
+                <div className="flex justify-between items-start mb-3">
+                  <div>
+                    <h3 className={styles.carName}>{car.name}</h3>
+                    <p className={styles.carInfoContainer}>
+                      <span className={styles.carTypeBadge}>{car.type}</span>
+                      <span className={styles.carYear}>{car.year}</span>
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           );
