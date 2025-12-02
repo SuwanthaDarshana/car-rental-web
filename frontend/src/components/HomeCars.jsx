@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { homeCarsStyles as styles } from "../assets/dummyStyles";
 import carsData from "../assets/HcarsData";
-import { Zap } from "lucide-react";
+import { CheckCircle, Fuel, Gauge, User, Zap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 
@@ -98,6 +98,22 @@ function HomeCars() {
                       <span className={styles.carYear}>{car.year}</span>
                     </p>
                   </div>
+                </div>
+                <div className={styles.specsGrid}>
+                  {
+                     [  
+                    { icon: User, value: car.seats, label: 'Seats' },
+                    { icon: Fuel, value: car.fuel, label: 'Fuel' },
+                    { icon: Gauge, value: car.mileage, label: 'Mileage' },
+                    { icon: CheckCircle, value: car.transmission, label: 'Trans' },
+                  ].map((spec,index) => (
+                    <div key={index} className={styles.specItem}>
+                      <div className={styles.specIconContainer(hoveredCard===car.id)}></div>
+                      <spec.icon className={styles.specIcon(hoveredCard===car.id)} />
+                    </div>
+                
+                  ))
+                  }
                 </div>
               </div>
             </div>
