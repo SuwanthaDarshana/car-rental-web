@@ -22,6 +22,7 @@ function Testimonial() {
               className={`${styles.accentText} mx-4`}
               size={24}
             />
+            <div className={styles.dividerLine} />
           </div>
         </div>
       </div>
