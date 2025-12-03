@@ -1,6 +1,8 @@
 import React from "react";
 import { testimonialStyles as styles } from "../assets/dummyStyles";
 import testimonials from "../assets/TestimonialData";
+import { FaCar } from "react-icons/fa";
+import { GiSteeringWheel } from "react-icons/gi";
 
 function Testimonial() {
   return (
@@ -14,6 +16,13 @@ function Testimonial() {
           <h1 className={styles.title}>
             Premium <span className={styles.accentText}>Drive</span>Experiences
           </h1>
+          <div className={styles.dividerContainer}>
+            <div className={styles.dividerLine} />
+            <GiSteeringWheel
+              className={`${styles.accentText} mx-4`}
+              size={24}
+            />
+          </div>
         </div>
       </div>
     </div>
