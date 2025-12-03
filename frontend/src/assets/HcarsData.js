@@ -15,7 +15,7 @@ const carsData = [
     image: HC1,
     description: "Reliable, fuel-efficient commuter.",
     seats: 5,
-    fuel: "Gasoline",
+    fuel: "Petrol",
     mileage: "30 MPG",
     transmission: "Automatic"
   },
@@ -27,7 +27,7 @@ const carsData = [
     image: HC2,
     description: "Sporty handling with modern tech.",
     seats: 5,
-    fuel: "Gasoline",
+    fuel: "Petrol",
     mileage: "32 MPG",
     transmission: "Automatic"
   },
@@ -39,7 +39,7 @@ const carsData = [
     image: HC3,
     description: "Practical hatch with punchy engine.",
     seats: 5,
-    fuel: "Gasoline",
+    fuel: "Petrol",
     mileage: "29 MPG",
     transmission: "Manual"
   },
@@ -51,7 +51,7 @@ const carsData = [
     image: HC4,
     description: "Smooth ride, lots of tech features.",
     seats: 5,
-    fuel: "Gasoline",
+    fuel: "Petrol",
     mileage: "33 MPG",
     transmission: "Automatic"
   },
@@ -63,7 +63,7 @@ const carsData = [
     image: HC5,
     description: "Comfortable and spacious daily driver.",
     seats: 5,
-    fuel: "Gasoline",
+    fuel: "Petrol",
     mileage: "31 MPG",
     transmission: "Automatic"
   },

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { homeCarsStyles as styles } from "../assets/dummyStyles";
 import carsData from "../assets/HcarsData";
-import { CheckCircle, Fuel, Gauge, User, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle, Fuel, Gauge, User, Zap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-
 
 function HomeCars() {
   const navigate = useNavigate();
@@ -100,22 +99,41 @@ function HomeCars() {
                   </div>
                 </div>
                 <div className={styles.specsGrid}>
-                  {
-                     [  
-                    { icon: User, value: car.seats, label: 'Seats' },
-                    { icon: Fuel, value: car.fuel, label: 'Fuel' },
-                    { icon: Gauge, value: car.mileage, label: 'Mileage' },
-                    { icon: CheckCircle, value: car.transmission, label: 'Trans' },
-                  ].map((spec,index) => (
+                  {[
+                    { icon: User, value: car.seats, label: "Seats" },
+                    { icon: Fuel, value: car.fuel, label: "Fuel" },
+                    { icon: Gauge, value: car.mileage, label: "Mileage" },
+                    {
+                      icon: CheckCircle,
+                      value: car.transmission,
+                      label: "Trans",
+                    },
+                  ].map((spec, index) => (
                     <div key={index} className={styles.specItem}>
-                      <div className={styles.specIconContainer(hoveredCard===car.id)}></div>
-                      <spec.icon className={styles.specIcon(hoveredCard===car.id)} />
+                      <div
+                        className={styles.specIconContainer(
+                          hoveredCard === car.id
+                        )}
+                      >
+                        <spec.icon
+                          className={styles.specIcon(hoveredCard === car.id)}
+                        />
+                      </div>
+                      <span className={styles.specValue}>{spec.value}</span>
+                      <span className={styles.specLabel}>{spec.label}</span>
                     </div>
-                
-                  ))
-                  }
+                  ))}
                 </div>
+                <button
+                  onClick={() =>
+                    navigate(`/cars/${car.id}`, { state: { car } })
+                  }
+                  className={styles.bookButton}
+                >
+                  <span className={styles.buttonText}>Book Now <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform"/></span>
+                </button>
               </div>
+              <div className={styles.accentBlur}></div>
             </div>
           );
         })}
