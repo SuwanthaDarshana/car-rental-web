@@ -2,6 +2,7 @@
 import HomeBanner from '../components/HomeBanner'
 import HomeCars from '../components/HomeCars'
 import Navbar from '../components/Navbar'
+import Testimonial from '../components/Testimonial'
 
 function Home() {
   return (
@@ -9,6 +10,7 @@ function Home() {
       <Navbar />
       <HomeBanner />
       <HomeCars/>
+      <Testimonial/>
     </>
   )
 }
