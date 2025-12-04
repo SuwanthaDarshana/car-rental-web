@@ -45,6 +45,7 @@ function Testimonial() {
                     backdropFilter: "blur(10px)",
                     border: "1px solid rgba(100,100,120,0.2)",
                     boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
+                    /*boxShadow: "0 10px 30px rgba(0,0,0,0.3)", */
                   }}
                 ></div>
               );
